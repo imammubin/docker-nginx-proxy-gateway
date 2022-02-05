@@ -1,0 +1,24 @@
+
+    upstream app1 {
+        server nginx:80;
+    }
+    upstream app2 {
+        server apache:80;
+    }
+
+    server {
+        listen       80;
+        server_name  fe.lcl; 
+        location / {
+            proxy_pass http://app1;
+        }
+    }
+
+    server {
+        listen       80;
+        server_name  be.lcl; 
+        location / {
+            proxy_pass http://app2;
+        }
+    }
+
